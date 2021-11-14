@@ -39,19 +39,23 @@ export default {
       isOpen: false
     }
   },
-  computed:{
-    // activeCheck(){
-
-    // }
-  },
+  computed:{},
   methods: {
     selectOption(option){
-      this.$emit('selectOption', option)
-      this.isOpen = false
+      this.$emit('selectOption', option)      
     },
     activeCheck(opton){
       return opton.name == this.selected
+    },
+    hideSelect(){
+      this.isOpen = false
     }
+  },
+  mounted(){
+    document.addEventListener('click', this.hideSelect.bind(), true)
+  },
+  beforeDestroy(){
+    document.removeEventListener('click', this.hideSelect)
   }
 }
 </script>
